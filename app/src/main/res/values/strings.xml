@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GlobalVPN</string>
+    <string name="subtitle">WireGuard · ChaCha20-Poly1305 全程加密</string>
+    <string name="help_icon">\?</string>
+    <string name="section_countries">選擇國家</string>
+    <string name="country_name">%1$s  %2$s</string>
+    <string name="row_not_configured">未設定 · 點一下匯入伺服器設定</string>
+    <string name="row_configured">已設定 · %1$s</string>
+    <string name="mark_connected">已連線</string>
+    <string name="mark_busy">…</string>
+
+    <string name="power_connect">%1$s\n點此連線</string>
+    <string name="power_connecting">%1$s\n連線中…</string>
+    <string name="power_connected">%1$s\n已連線</string>
+    <string name="power_disconnecting">%1$s\n中斷中…</string>
+    <string name="status_ready">已選擇 %1$s，點上方按鈕連線</string>
+    <string name="status_need_config">請先匯入伺服器設定檔（點國家或右上角 ?）</string>
+    <string name="status_connecting">正在連線到 %1$s 伺服器…</string>
+    <string name="status_connected">已透過 %1$s 伺服器加密連線 · 再點一次可中斷</string>
+    <string name="status_disconnecting">正在中斷連線…</string>
+    <string name="checking">檢查中…</string>
+    <string name="please_wait">請稍候…</string>
+
+    <string name="label_down">下載速度</string>
+    <string name="label_up">上傳速度</string>
+    <string name="label_ip">出口 IP</string>
+    <string name="label_loc">出口位置</string>
+    <string name="label_duration">連線時間（無限制）</string>
+    <string name="label_traffic">本次流量</string>
+
+    <string name="btn_import">📂 批次匯入設定檔</string>
+    <string name="btn_kill">🛡 防洩漏設定</string>
+    <string name="footer">點國家即可連線或切換；長按國家可貼上、更換或刪除該國的設定檔。</string>
+
+    <string name="vpn_consent_failed">無法開啟 VPN 授權視窗</string>
+    <string name="vpn_consent_denied">需要允許建立 VPN 才能連線</string>
+
+    <string name="cfg_title">%1$s %2$s 伺服器設定</string>
+    <string name="cfg_paste">貼上設定文字</string>
+    <string name="cfg_file">從檔案匯入（.conf）</string>
+    <string name="cfg_delete">刪除這個設定</string>
+    <string name="paste_title">%1$s 貼上 %2$s 的設定</string>
+    <string name="save">儲存</string>
+    <string name="cancel">取消</string>
+    <string name="ok">好</string>
+    <string name="delete">刪除</string>
+    <string name="err_empty">內容是空的</string>
+    <string name="saved">已儲存%1$s的設定</string>
+    <string name="delete_title">刪除%1$s的設定？</string>
+    <string name="delete_msg">刪除後需要重新匯入才能連到這個國家。</string>
+    <string name="no_file_picker">找不到檔案管理員</string>
+    <string name="read_failed">讀取失敗：%1$s</string>
+    <string name="import_failed">匯入失敗</string>
+    <string name="batch_title">批次匯入結果</string>
+    <string name="batch_ok">成功 %1$d 個：</string>
+    <string name="batch_failed">失敗 %1$d 個：</string>
+    <string name="batch_unknown_country">%1$s：無法從檔名判斷國家（檔名需含國家代碼，例如 jp-phone.conf）</string>
+
+    <string name="kill_title">防洩漏（Kill Switch）與開機自動連線</string>
+    <string name="kill_msg">Android 內建防洩漏功能，不需要 root：\n\n1. 按下方「前往設定」\n2. 點 GlobalVPN 旁的齒輪 ⚙\n3. 開啟「永久連線的 VPN」\n4. 開啟「封鎖未使用 VPN 的連線」\n\n開啟後：手機開機會自動連到上次使用的國家；VPN 一旦中斷，所有網路都會被擋下，不會有未加密的流量外洩。\n\n（需要先成功連線過一次，系統清單裡才會出現 GlobalVPN）</string>
+    <string name="kill_open">前往設定</string>
+    <string name="no_settings">無法開啟系統設定</string>
+
+    <string name="help_title">如何設定伺服器</string>
+    <string name="help_msg">這個 app 會連到「你自己的」伺服器，所以沒有時間和流量限制。\n\n1. 在想要的國家租一台 Ubuntu 或 Debian 雲端主機（VPS）\n2. 用 SSH 登入後執行一行指令（見說明文件）：\n   sudo bash install.sh jp\n   （jp 換成該國代碼：us jp de fr se uk fi es it no）\n3. 腳本會產生設定檔，例如 jp-phone.conf\n4. 回到 app：點該國家 → 貼上設定文字；或用「批次匯入」一次選多個 .conf 檔\n5. 點國家即可連線\n\n加密：WireGuard（ChaCha20-Poly1305 + Curve25519 + 預共享金鑰），所有封包都經過加密，額外負擔只有幾個百分比，速度主要取決於你和伺服器的距離。</string>
+</resources>
