@@ -8,6 +8,7 @@ import android.os.SystemClock
 import com.wireguard.android.backend.BackendException
 import com.wireguard.android.backend.GoBackend
 import com.wireguard.android.backend.Tunnel
+import com.wireguard.config.BadConfigException
 import com.wireguard.config.Config
 import java.io.BufferedReader
 import java.io.StringReader
@@ -107,8 +108,12 @@ object VpnManager {
             if (cfg.peers.isEmpty()) "設定檔裡沒有 [Peer] 伺服器資料"
             else if (cfg.peers[0].endpoint.isPresent.not()) "設定檔缺少 Endpoint（伺服器位址）"
             else null
+        } catch (e: BadConfigException) {
+            val where = e.location.getName()
+            if (where.isEmpty()) "設定檔格式錯誤（[${e.section.getName()}] 區段）"
+            else "設定檔格式錯誤：[${e.section.getName()}] 的 $where 不正確"
         } catch (e: Exception) {
-            "設定檔格式錯誤" + (e.message?.let { "：$it" } ?: "")
+            "設定檔格式錯誤，請確認是完整複製"
         }
     }
 
@@ -163,12 +168,13 @@ object VpnManager {
                 main.post { onConnected(tunnel) }
             } catch (e: Exception) {
                 // On a failed switch GoBackend restores the previous tunnel.
-                val restored = previous != null &&
-                        runCatching { backend.getState(previous) }.getOrNull() == Tunnel.State.UP
+                val restored = previous?.takeIf {
+                    runCatching { backend.getState(it) }.getOrNull() == Tunnel.State.UP
+                }
                 val message = describeBackendError(e)
                 main.post {
-                    if (restored && previous != null) {
-                        onConnected(previous)
+                    if (restored != null) {
+                        onConnected(restored)
                         publish(state.copy(error = message))
                     } else {
                         current = null
